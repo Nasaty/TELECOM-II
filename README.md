@@ -1,26 +1,35 @@
-#  Predicción de Evasión (Churn) - Telecom X
+# Telecom X - Predicción de Evasión (Churn) - Parte 2
 
-Este repositorio contiene la fase avanzada de ciencia de datos para la empresa Telecom X. El objetivo es predecir qué clientes tienen mayor probabilidad de cancelar su servicio utilizando modelos de Machine Learning.
+## Propósito del Análisis
+El objetivo principal de este proyecto es desarrollar un modelo de Machine Learning capaz de predecir la cancelación (churn) de clientes de Telecom X. Al identificar los patrones que llevan a un cliente a abandonar la compañía, la empresa puede tomar decisiones proactivas para mejorar la retención y reducir pérdidas económicas.
 
-##  Estructura del Proyecto
-- `datos_tratados.csv`: Dataset procesado en la Parte 1, con limpieza de nulos, normalización de campos anidados y estandarización de tipos de datos.
-- `telecom_ii.py`: Script principal de Python que ejecuta el pipeline de Machine Learning.
+## Estructura del Proyecto y Organización
+- **telecom_ii.py**: Cuaderno principal que contiene el pipeline de ciencia de datos y entrenamiento de modelos.
+- **datos_tratados.csv**: Dataset limpio y estandarizado (generado en la Parte 1) que sirve como base para este análisis.
 
-## 🛠️ Procesos Implementados
-Para garantizar la eficacia del modelo, se realizaron los siguientes pasos técnicos:
-1. **Carga Continua:** Uso del archivo CSV procesado según estándares de Trello.
-2. **Balanceo de Datos:** Implementación de **SMOTE** para equilibrar la clase minoritaria (clientes que cancelan).
-3. **Escalado:** Uso de `StandardScaler` para normalizar las variables numéricas.
-4. **Modelado:** Entrenamiento y comparación entre **Regresión Logística** y **Random Forest**.
+## Preparación de los Datos
+Para garantizar la eficacia del modelo, se realizaron los siguientes pasos:
+1. Clasificación de Variables: Identificamos variables categóricas (como tipo de contrato, servicios) y numéricas (tenure, MonthlyCharges, TotalCharges).
+2. Codificación y Normalización: 
+    - Se aplicó One-Hot Encoding a las variables categóricas.
+    - Se utilizó StandardScaler para normalizar las variables numéricas, asegurando que todas estén en la misma escala.
+3. Separación de Datos: Los datos se dividieron en 80% entrenamiento y 20% prueba usando train_test_split.
 
-##  Resultados y Conclusiones
-El modelo de **Regresión Logística** demostró ser el más efectivo para este caso de negocio:
-- **Recall (Sensibilidad): 68%** - Capacidad de detectar correctamente a los clientes en riesgo.
-- **Factor de Riesgo Identificado:** Los clientes con contrato "Mes a Mes" y servicio de "Fibra Óptica" son los más propensos a la fuga.
-- **Factor de Retención:** Los contratos a largo plazo (1 o 2 años) reducen drásticamente la evasión.
+## Modelización y Justificación
+- Balanceo con SMOTE: Debido al desequilibrio en los datos (pocos clientes cancelados vs. muchos activos), se aplicó SMOTE para equilibrar las clases y mejorar la detección de fugas.
+- Modelos Evaluados: Se compararon Regresión Logística y Random Forest. La Regresión Logística fue seleccionada por su equilibrio entre precisión y capacidad de interpretación para el negocio.
 
-##  Cómo ejecutarlo
-1. Clona este repositorio.
-2. Asegúrate de tener instaladas las librerías: `pandas`, `sklearn`, `imblearn`, `seaborn`, `matplotlib`.
-3. Ejecuta el archivo `telecom_ii.py`.
-Modelo predictivo de evasión de clientes para Telecom challenge Alura
+## Insights y Gráficos (EDA)
+Durante el análisis exploratorio, se obtuvieron hallazgos críticos:
+- Fibra Óptica: Es el servicio con mayor tasa de abandono, sugiriendo posibles problemas de precio o calidad.
+- Tipo de Contrato: Los contratos "Mes a Mes" tienen una probabilidad de fuga significativamente mayor que los contratos de 1 o 2 años.
+
+## Instrucciones de Ejecución
+Para replicar este análisis o ejecutar el modelo en tu entorno local o en Google Colab, sigue estos pasos:
+
+### 1. Instalación de Librerías
+Ejecuta el siguiente comando para instalar las dependencias necesarias:
+
+```bash
+pip install pandas seaborn matplotlib scikit-learn imbalanced-learn
+df = pd.read_csv('datos_tratados.csv')
